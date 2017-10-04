@@ -1,0 +1,30 @@
+function lissajousfigures() %李萨如图形
+clear;
+clc;
+global A1 w1 fai1 A2 w2 fai2;
+options={'水平振动振幅A1','水平振动频率w1','水平振动初相位fai1',...
+    '竖直振动振幅A2','竖直振动频率w2','竖直振动初相位fai2'};
+topic='seting';
+lines=1;
+def={'1','1','0','1','1','0'};
+h=inputdlg(options,topic,lines,def);
+A1=eval(h{1});
+w1=eval(h{2});
+fai1=eval(h{3})*pi/180;
+A2=eval(h{4});
+w2=eval(h{5});
+fai2=eval(h{6})*pi/180;
+%***************************************************************
+t=linspace(0,2*pi/w1*2*pi/w2,10000);%两个振动周期的公倍数
+x=A1*cos(w1*t+fai1);%x方向的振动
+y=A2*cos(w2*t+fai2);%y方向的振动
+plot(x,y);
+tuzhu=['w1:w2=',h{2},':',h{5}];   
+text(-2,2,tuzhu);
+T1=num2str(1/w1);
+T2=num2str(1/w2);
+text(1,2,['T1:T2=',T1,':',T2]);
+%图形显示范围
+axis([-A1-2 A1+2 -A2-2 A2+2]);
+title 李萨如图形
+
